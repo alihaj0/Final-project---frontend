@@ -1,0 +1,32 @@
+.imagesContainer {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  margin-top: 20px;
+}
+
+.image {
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .imagesContainer {
+    gap: 8px;
+  }
+  .container {
+    gap: 4px;
+  }
+  .image {
+    width: 40px;
+  }
+}/*# sourceMappingURL=ProductImage.module.css.map */
