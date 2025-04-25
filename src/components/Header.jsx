@@ -22,6 +22,7 @@ import UserIcon from "../assets/icons/user.svg";
 import BagIcon from "../assets/icons/bag.svg";
 import CartDrawer from "./Drawer/CartDrawer.jsx";
 import { useAuth } from "../context/AuthContext";
+import { getProductsByCate } from "../lib/my-api.js";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -159,6 +160,7 @@ const Header = () => {
                   textTransform: "none",
                   fontFamily: "Inter",
                 }}
+                onClick={getProductsByCate(item)}
               >
                 {item}
               </Button>
