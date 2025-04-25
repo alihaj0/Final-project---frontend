@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Drawer, Box, IconButton, Typography, TextField, Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -15,7 +15,7 @@ const CartDrawer = ({ open, onClose }) => {
     queryFn: getCart,
     onError: (error) => console.error("Failed to fetch cart items", error),
   });
-  const cartItems = cartQuery.data?.cart?.products || [];;
+  const cartItems = cartQuery.data?.cart?.products || [];
 
   const queryClient = useQueryClient();
   const handleQuantityChange = async (itemId, newQuantity) => {
@@ -56,15 +56,15 @@ const CartDrawer = ({ open, onClose }) => {
       anchor="right"
       open={open}
       onClose={onClose}
-      transitionDuration={{ enter: 150, exit: 150 }} 
-      sx={{ 
+      transitionDuration={{ enter: 150, exit: 150 }}
+      sx={{
         '& .MuiDrawer-paper': {
           top: '80px',
           height: 'auto',
           maxHeight: '80%',
-          width: { xs: '100%', sm: 400 }, 
+          width: { xs: '100%', sm: 400 },
           boxSizing: 'border-box',
-          transition: 'transform 150ms ease-in-out', 
+          transition: 'transform 150ms ease-in-out',
         },
       }}
     >
@@ -159,6 +159,7 @@ const CartDrawer = ({ open, onClose }) => {
                 backgroundColor: '#143A4F',
               },
             }}
+            onClick={onClose}
           >
             Place Order
           </Button>

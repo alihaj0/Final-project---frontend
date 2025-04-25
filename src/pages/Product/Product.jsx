@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   useQuery,
+  useMutation, useQueryClient,
   QueryClient,
   QueryClientProvider,
 } from "@tanstack/react-query";
@@ -12,13 +13,13 @@ import ProductImage from "../../components/ProductComponents/ProductImage";
 import QuantitySelector from "../../components/ProductComponents/QuantitySelector";
 import ActionButtons from "../../components/ProductComponents/ActionButtons";
 import TabsSection from "../../components/ProductComponents/TabsSection";
-import { getProduct } from "../../lib/my-api";
+import { getProduct, getCart } from "../../lib/my-api";
 import axios from "axios";
 
-//import Tabs from './Tabs';
 
 const Product = () => {
   const [quantityCount, setQuantityCount] = useState(1);
+
 
   const handleIncrement = () => {
     setQuantityCount(quantityCount + 1);
@@ -36,18 +37,34 @@ const Product = () => {
     queryFn: () => getProduct(productId),
   });
   const product = productQuery.data?.product || [];
-  console.log(product);
 
-  const clickHandler = () => {
-    const token = localStorage.getItem("token");
-    axios.post(
-      "https://backend-final-g1-955g.onrender.com/api/carts/product/set",
-      { quantity: quantityCount, productId: productId },
-      {
-        headers: {Authorization: `Bearer ${token}`},
-      }
-    );
+  const useAddToCart = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+      mutationFn: async ({ quantity, productId }) => {
+        const token = localStorage.getItem("token");
+        return axios.post(
+          "https://backend-final-g1-955g.onrender.com/api/carts/product/set",
+          { quantity, productId },
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+      },
+      onSuccess: () => {
+        // Refetch cart data after a successful add
+        queryClient.invalidateQueries({ queryKey: ["cartItems", "list"] });
+      },
+    });
   };
+
+  const { mutate: addToCart, isPending } = useAddToCart();
+
+  const clickHandler = async () => {
+    addToCart({ quantity: quantityCount, productId });
+  };
+
 
   return (
     <Container maxWidth="1440px" sx={{ m: 0, ml: "1%" }}>

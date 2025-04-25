@@ -3,6 +3,8 @@ import { Box } from "@mui/material";
 import ProductButton from "./ProductButton";
 import bagIcon from "../../assets/icons/bag.svg";
 import heartIcon from "../../assets/icons/heart.svg";
+import { getCart } from '../../lib/my-api';
+
 
 const ActionButtons = ({ onClick }) => {
   const addToBagButtonStyles = {
