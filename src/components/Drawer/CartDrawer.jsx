@@ -16,6 +16,7 @@ const CartDrawer = ({ open, onClose }) => {
     onError: (error) => console.error("Failed to fetch cart items", error),
   });
   const cartItems = cartQuery.data?.cart?.products || [];
+  const cartId = cartQuery.data?.cart?.id || ""
 
   const queryClient = useQueryClient();
   const handleQuantityChange = async (itemId, newQuantity) => {
@@ -87,6 +88,7 @@ const CartDrawer = ({ open, onClose }) => {
               itemDescription={item.description}
               quantity={item.quantity}
               price={item.price}
+              id={item.id}
               onQuantityChange={(newQuantity) => handleQuantityChange(item.id, newQuantity)}
             />
           ))}

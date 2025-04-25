@@ -1,10 +1,49 @@
 import React from 'react';
-import { Box, Typography, IconButton, Divider } from '@mui/material';
+import { Box, Typography, IconButton, Divider, Button } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
+import axios from 'axios';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, onQuantityChange }) => {
+
+const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, id }) => {
+
+  const useRemoveItem = () => {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+      mutationFn: async (itemId) => {
+        const token = localStorage.getItem("token");
+        const response = await axios.delete(
+          `https://backend-final-g1-955g.onrender.com/api/carts/product/delete/${itemId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        return response.data;
+      },
+      onSuccess: () => {
+        // Refresh the cart data after deletion
+        queryClient.invalidateQueries({ queryKey: ["cartItems", "list"] });
+      },
+    });
+  };
+
+  const { mutate: removeItemFromCart, isPending } = useRemoveItem();
+
+  const removeItem = (itemId) => {
+    removeItemFromCart(itemId);
+
+  }
+
+
+
   return (
-    <>
+    <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
+      <Button sx={{ width: "10%", }} onClick={() => removeItem(id)}>
+        x
+      </Button>
       <Box
         sx={{
           display: 'flex',
@@ -65,7 +104,7 @@ const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, onQu
               mt: 1,
             }}
           >
-            {/* Quantity Controls */}
+            {/* Quantity */}
             <Box
               sx={{
                 display: 'flex',
@@ -76,13 +115,6 @@ const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, onQu
                 mr: 2, // Margin to separate price and quantity
               }}
             >
-              <IconButton
-                onClick={() => onQuantityChange(quantity - 1)}
-                size="small"
-                sx={{ color: '#1B4B66', padding: 0 }}
-              >
-                <Remove fontSize="small" />
-              </IconButton>
               <Typography
                 variant="body2"
                 sx={{
@@ -94,13 +126,7 @@ const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, onQu
               >
                 {quantity}
               </Typography>
-              <IconButton
-                onClick={() => onQuantityChange(quantity + 1)}
-                size="small"
-                sx={{ color: '#1B4B66', padding: 0 }}
-              >
-                <Add fontSize="small" />
-              </IconButton>
+
             </Box>
 
             {/* Price */}
@@ -122,7 +148,7 @@ const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, onQu
 
       {/* Divider */}
       <Divider sx={{ width: '100%', my: 1 }} />
-    </>
+    </Box>
   );
 };
 
