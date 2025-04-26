@@ -24,9 +24,8 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen />
       <Router>
-        
+
         <AuthProvider>
           <CartProvider>
             <Box className="App" style={{ width: "100%" }}>
@@ -45,12 +44,12 @@ function App() {
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/myCart" element={<MyCart />} />
                     <Route path="/welcome" element={<Welcome />} />
-                    
+
                   </Route>
                 </Routes>
               </Layout>
             </Box>
-            </CartProvider>
+          </CartProvider>
         </AuthProvider>
       </Router>
     </QueryClientProvider>

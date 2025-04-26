@@ -193,6 +193,7 @@ const Header = () => {
             <img src={HeartIcon} style={{ width: "24px" }} />
           </IconButton>
           <IconButton
+            data-testid="Header-userAccount"
             sx={{ display: { xs: "none", sm: "block" } }}
             size="large"
             aria-label="user account"
