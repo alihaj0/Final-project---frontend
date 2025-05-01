@@ -90,6 +90,7 @@ export default function SignUp() {
                   rules={{ required: 'First name is required' }}
                   render={({ field }) => (
                     <TextField
+                      data-testid="firstName"
                       {...field}
                       margin="normal"
                       required
@@ -107,6 +108,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Controller
+                  data-testid="lastName"
                   name="lastName"
                   control={control}
                   defaultValue=""
