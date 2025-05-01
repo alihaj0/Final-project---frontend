@@ -23,5 +23,8 @@ test('Sign-in', async ({ page }) => {
 
     const submitButton= page.getByTestId("submit")
     await submitButton.click()
+
+    await page.waitForURL("http://localhost:5173/welcome")
+    await expect(page).toHaveURL("http://localhost:5173/welcome")
 });
 
