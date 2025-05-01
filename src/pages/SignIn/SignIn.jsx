@@ -94,6 +94,7 @@ export default function SignIn() {
               }}
               render={({ field }) => (
                 <TextField
+                  data-testid="email"
                   {...field}
                   margin="normal"
                   required
@@ -116,6 +117,7 @@ export default function SignIn() {
               rules={{ required: 'Password is required' }}
               render={({ field }) => (
                 <TextField
+                  data-testid="password"
                   {...field}
                   margin="normal"
                   required
@@ -137,7 +139,7 @@ export default function SignIn() {
               </Typography>
             )}
 
-            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <Button data-testid="submit" type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
 
