@@ -41,7 +41,7 @@ const DrawerItem = ({ imageSrc, itemName, itemDescription, quantity, price, id }
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-end" }}>
-      <Button sx={{ width: "10%", }} onClick={() => removeItem(id)}>
+      <Button data-testid="removeBtn" sx={{ width: "10%", }} onClick={() => removeItem(id)}>
         x
       </Button>
       <Box

@@ -218,6 +218,7 @@ const Header = () => {
             {isAuthenticated ? (
               <>
                 <MenuItem
+                  data-testid="cart"
                   component={RouterLink}
                   to="/myCart"
                   onClick={handleMenuClose}
@@ -246,6 +247,7 @@ const Header = () => {
             )}
           </Menu>
           <IconButton
+            data-testid="cart"
             size="large"
             aria-label="shopping cart"
             color="inherit"

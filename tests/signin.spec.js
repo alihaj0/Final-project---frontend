@@ -1,7 +1,7 @@
 // @ts-check
 import { test, expect } from '@playwright/test';
 
-test('Sign up', async ({ page }) => {
+test('Sign-in', async ({ page }) => {
     await page.goto('http://localhost:5173/');
 
     // Expect a title "to contain" a substring.
@@ -16,7 +16,7 @@ test('Sign up', async ({ page }) => {
     await expect(page).toHaveURL("http://localhost:5173/signin")
 
     const emailInput =page.getByTestId("email").locator("input")
-    await emailInput.fill("test2025@test.com")
+    await emailInput.fill("test2024@test.com")
 
     const passwordInput=page.getByTestId("password").locator("input")
     await passwordInput.fill("Abcd1234*")
