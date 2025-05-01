@@ -1,0 +1,7 @@
+{
+    "scripts": {
+        "run-test":"playwright test",
+        "run-test-ui":"playwright test --headed"
+
+    }
+}
