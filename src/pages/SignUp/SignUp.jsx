@@ -105,17 +105,16 @@ export default function SignUp() {
                     />
                   )}
                 />
-                {/* test */}
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Controller
-                  data-testid="lastName"
                   name="lastName"
                   control={control}
                   defaultValue=""
                   rules={{ required: 'Last name is required' }}
                   render={({ field }) => (
                     <TextField
+                      data-testid="lastName"
                       {...field}
                       margin="normal"
                       required
@@ -138,6 +137,7 @@ export default function SignUp() {
               rules={{ required: 'Email is required' }}
               render={({ field }) => (
                 <TextField
+                  data-testid="email"
                   {...field}
                   margin="normal"
                   required
@@ -158,6 +158,7 @@ export default function SignUp() {
               rules={{ required: 'Password is required' }}
               render={({ field }) => (
                 <TextField
+                  data-testid="password"
                   {...field}
                   margin="normal"
                   required
@@ -179,6 +180,7 @@ export default function SignUp() {
             />
 
             <Button
+              data-testid="submit"
               type="submit"
               fullWidth
               variant="contained"
